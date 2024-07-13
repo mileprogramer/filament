@@ -1,0 +1,22 @@
+created:
+    - database/factories/CarFactory.php
+    - database/factories/UserFactory.php
+    - database/factories/RentedCarFactory.php
+    - database/factories/StatisticsFactory.php
+    - database/factories/AdministratorFactory.php
+    - database/migrations/2024_07_13_151130_create_cars_table.php
+    - database/migrations/2024_07_13_151131_create_users_table.php
+    - database/migrations/2024_07_13_151132_create_rented_cars_table.php
+    - database/migrations/2024_07_13_151133_create_statistics_table.php
+    - database/migrations/2024_07_13_151134_create_administrators_table.php
+    - app/Models/Car.php
+    - app/Models/User.php
+    - app/Models/RentedCar.php
+    - app/Models/Statistics.php
+    - app/Models/Administrator.php
+models:
+    Car: { license: 'string:20,', model: 'string:100,', brand: 'string:100,', year: 'number,', price_per_day: 'number,', transmission_type: 'enum:automatic,manuel,semi-automatic,', number_of_doors: 'number,', person_fit_in: 'number,', car_consumption: 'number,', air_conditioning_type: 'enum:Manual,Automatic,DualZone,MultiZone,RearSeat,Electric,Hybrid,SolarPowered', status: 'enum:available,rented,removed,broken', relationships: { hasOne: RentedCar } }
+    User: { personal_data: 'string:255,', id_card: 'number,', phone_number: 'number,', email: 'string:60 nullable', relationships: { hasMany: RentedCars } }
+    RentedCar: { id_user: unsignedInteger, id_car: unsignedInteger, start_date: date, return_date: date, price_per_day: number, relationships: { belongsTo: 'Car, User' } }
+    Statistics: { id_user: unsignedInteger, id_car: unsignedInteger, start_date: date, return_date: date, price_per_day: number, relationships: { belongsTo: 'Car, User' } }
+    Administrator: { username: 'string:100,', password: 'string:60,', email: 'string:60' }
